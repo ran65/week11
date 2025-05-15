@@ -1,0 +1,26 @@
+---
+app_home: '/home/ubuntu/blog-app'
+app_port: 5000
+app_host: '0.0.0.0'
+app_mode: 'production'
+
+# Database configuration
+mongodb_uri: 'mongodb+srv://test:qazqwe123@mongodb.txkjsso.mongodb.net/blog-app'
+
+# JWT Authentication
+jwt_secret: "{{ lookup('password', '/dev/null chars=ascii_letters,digits length=32') }}"
+jwt_expire: '30min'
+jwt_refresh: "{{ lookup('password', '/dev/null chars=ascii_letters,digits length=32') }}"
+jwt_refresh_expire: '3d'
+
+# AWS S3 Configuration
+# These values are automatically populated from the Terraform outputs
+# via the variables passed with --extra-vars "@extra_vars.yml"
+aws_access_key_id: '{{ s3_user_access_key }}'
+aws_secret_access_key: '{{ s3_user_secret_key }}'
+aws_region: 'eu-north-1'
+s3_bucket: '{{ media_bucket_name }}'
+media_base_url: 'https://{{ media_bucket_name }}.s3.{{ aws_region }}.amazonaws.com'
+
+# Misc
+default_pagination: 20
